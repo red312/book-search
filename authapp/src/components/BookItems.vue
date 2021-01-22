@@ -7,6 +7,11 @@
         <div class="links">
         <a :href="book.volumeInfo.infoLink" class="bigLink">Читать</a>
         <router-link tag="a" class="link" :to="{name: `book`, params: {book: book, bookName: book.volumeInfo.title}}">Описание</router-link>
+        <div v-if="favorite()">
+            <div @click="delteFromFavorite">
+                <div class="workWithFavorite" @click="$emit('delete-favorite', book)">Удалить из избранного</div>
+            </div>
+        </div>
         </div>
         <div class = "description">
             <p class="title">{{book.volumeInfo.title}}</p>
@@ -31,6 +36,14 @@ export default {
         }
     },
     methods:{
+        favorite: function() {
+            return this.$route.path.indexOf('/favorite') === 0
+        },
+        delteFromFavorite(){
+            
+            const newBook = this.book
+            this.$emit('delete-favorite', newBook)
+        },
 }
 }
 </script>

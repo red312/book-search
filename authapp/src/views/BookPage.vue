@@ -21,12 +21,14 @@
                 <div class="lng">Язык: {{book.volumeInfo.language}}</div>
                 <div class="links">
                     <a :href="book.volumeInfo.infoLink" class="readLink" target="_blank">Читать</a>
+                    <p class="favorite-button" @click.prevent="addToFavorite">Добавить в избранное</p>
                     <a v-if="book.accessInfo.acsTokenLink" :href="book.accessInfo.acsTokenLink" class="Скачать">Скачать</a>
                 </div>
             </div>
         </div>
     <div v-if="book.volumeInfo.description" class="description">{{book.volumeInfo.description}}</div>
     <!-- <div v-else class="description">Описание отсутсвует</div> -->
+    
     </div>
     <div class="comment-section">
         <div>
@@ -63,6 +65,14 @@ export default {
             }
     },
     methods: {
+         async addToFavorite(){
+            try{
+                let response = await this.$http.post('/auth/user', {book: this.book} ,{headers: {'Authorization': `Bearer ${localStorage.getItem("jwt")}`}});
+                console.log(response.data);
+            }catch(e){
+                console.log(e.response.data);
+            }
+        },
         async addComment(){
             try{
                 let response = await this.$http.post(`/auth/${this.$route.path}/comment`, {book: this.book, text: this.comment} ,{headers: {'Authorization': `Bearer ${localStorage.getItem("jwt")}`}});
@@ -189,5 +199,15 @@ export default {
         padding-top: 10px;
         padding-bottom: 10px;
         margin-top: 20px;
+    }
+    .favorite-button{
+        display: inline-block;
+        background: #717b87;
+        color: #fff;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        border-radius: 3px;
+        margin-left: 15px;
+        cursor: pointer;
     }
 </style>

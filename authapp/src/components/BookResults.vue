@@ -3,9 +3,9 @@
 <div class="book-results">
     <div v-if="books.length>0" class="DisplayBooks">
         <BookItems
+        @delete-favorite="deleteFavorite"
         v-for="book in books" :key="book.id"
-        @remove="deleteFavorite(book)"
-        v-bind:book="book"
+            v-bind:book="book"
         />
         </div>
 </div>

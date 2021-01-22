@@ -11,8 +11,11 @@ router.post('/registration', [
 ], controller.registration)
 router.post('/login', controller.login)
 router.get('/user', authMiddleware, controller.getUserInfo)
+router.post('/user',authMiddleware, controller.addBookToFavorite)
+router.post('/favorite', authMiddleware, controller.deleteFromFavoirte)
 router.post('/:bookName', authMiddleware, controller.addBook)
 router.post('/:bookName/comment', authMiddleware, controller.addComment)
 router.get('/:bookName', authMiddleware, controller.getBookInfo)
+
 
 module.exports = router

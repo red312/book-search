@@ -4,6 +4,7 @@ import Main from "../views/MainPage.vue";
 import BookPage from "../views/BookPage.vue";
 import Login from "../views/Login.vue";
 import Registration from "../views/Registration.vue";
+import Favorite from "../views/FavoritePage.vue"
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,11 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/favorite',
+    name: 'favorite',
+    component: Favorite
   },
   {
       path: '/:bookName',

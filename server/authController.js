@@ -45,9 +45,7 @@ class authController {
     }
     async login(req, res){
         try{
-            
             const {username, password} = req.body
-            
             const user = await User.findOne({username})
             if (!user){
                 return res.status(400).json({message: 'Пользователь не найден'})
@@ -75,12 +73,10 @@ class authController {
     }
     async addBook(req, res){
         try{
-            
             const book = req.body.book
             const name = req.params.bookName
             const candidate = await Book.findOne({name: name})
             if (candidate){
-                
                 return res.json({message: 'Книга уже добавлена'})
             }
             const bdBook = new Book({name: name, value: book})
@@ -112,6 +108,28 @@ class authController {
         }
         catch(e){
             console.log(e);
+        }
+    }
+    async addBookToFavorite(req, res){
+        try{
+            const book = req.body.book
+            await User.findOneAndUpdate({_id: req.user.id}, {$addToSet: {books: {value: book, name: book.volumeInfo.title}}})
+            return res.json({message: 'Книга добавлена в избранное'})
+        }
+        catch(e){
+            console.log(e);
+            res.status(400).json({message: 'Невозможно добавить книгу в избранное'})
+        }
+    }
+    async deleteFromFavoirte(req, res){
+        try{
+            const book = req.body.book
+            await User.findOneAndUpdate({_id: req.user.id}, {$pull: {books: {value: book, name: book.volumeInfo.title}}})
+            return res.json({message: 'Книга удалена из избранного'})
+        }
+        catch(e){
+            console.log(e);
+            res.status(400).json({message: 'Невозможно удалить книгу в избранное'})
         }
     }
 }

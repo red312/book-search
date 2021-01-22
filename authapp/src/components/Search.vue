@@ -18,7 +18,8 @@
         </select>
     </div>
     <div class="navigation">
-            <a class="nav-link" @click="logUserOut"> Logout</a>
+            <router-link tag="a" class="link" :to="{name: 'favorite'}">Избранное</router-link>
+            <a class="nav-link" @click="logUserOut">Выйти</a>
     </div>
 </body>
 </template>

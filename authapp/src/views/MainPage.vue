@@ -31,6 +31,7 @@ export default {
         }
     },
     beforeDestroy() {
+        if (localStorage.getItem('jwt') != null)
             sessionStorage.setItem("books", JSON.stringify(this.books))
     },
     methods: {

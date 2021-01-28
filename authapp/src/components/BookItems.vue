@@ -40,7 +40,6 @@ export default {
             return this.$route.path.indexOf('/favorite') === 0
         },
         delteFromFavorite(){
-            
             const newBook = this.book
             this.$emit('delete-favorite', newBook)
         },

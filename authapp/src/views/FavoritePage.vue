@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="header">
-      <router-link tag="a" class="link" :to="{name: 'main'}">Home</router-link>
+      <router-link tag="a" class="link" :to="{name: 'main'}">На главную</router-link>
     </div>
     <book-results :books="favorite"
         @remove="remove"

@@ -50,6 +50,7 @@ export default {
             }
         },
         logUserOut() {
+            sessionStorage.removeItem("books")
             localStorage.removeItem("jwt");
             this.$router.push("/");
     }

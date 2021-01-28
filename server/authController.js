@@ -1,7 +1,6 @@
 const User = require('./models/User');
 const Role = require('./models/Role');
 const Book = require('./models/Book');
-
 const Comment = require('./models/Comment');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -135,3 +134,4 @@ class authController {
 }
 
 module.exports = new authController()
+
